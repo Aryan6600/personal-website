@@ -1,0 +1,571 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins';
+}
+
+body {
+    background-color: #333;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 1rem 2rem;
+    color: white;
+}
+
+.navbar a.logo {
+    font-weight: bold;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    width: max-content;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    padding: 10px 1em;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    transition: color 0.3s ease;
+}
+
+.nav-links a.btn {
+    color: white;
+    background-color: #e6c200;
+    padding: 0.5em 1em;
+    border-radius: 100em;
+    transition: background 0.2s;
+    border: 1px solid transparent;
+    margin-right: 1em;
+}
+
+.nav-links a.btn:hover {
+    color: #e6c200;
+    border: 1px solid #e6c200;
+    background-color: transparent;
+    padding: 0.5em 1em;
+    border-radius: 100em;
+}
+
+
+.nav-links a:hover {
+    color: #ffd700;
+    /* A golden yellow color for hover effect */
+}
+
+.auth-buttons a {
+    text-decoration: none;
+    color: white;
+    margin-left: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.login-btn {
+    border: 1px solid white;
+}
+
+.signup-btn {
+    background-color: #ffd700;
+    color: #333;
+}
+
+.login-btn:hover {
+    background-color: white;
+    color: #333;
+}
+
+.signup-btn:hover {
+    background-color: #e6c200;
+}
+
+/* Basic Navbar styles from before remain the same */
+
+.menu-toggle {
+    display: none;
+    /* Hidden by default on desktop */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.hamburger {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    position: relative;
+}
+
+.hamburger::before,
+.hamburger::after {
+    content: '';
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    position: absolute;
+    left: 0;
+    transition: transform 0.3s ease;
+}
+
+.hamburger::before {
+    top: -8px;
+}
+
+.hamburger::after {
+    top: 8px;
+}
+
+/* On smaller screens, hide the nav links by default */
+
+
+/* Featured Section - Most styles remain, but we adjust flex alignment */
+.featured-section {
+    width: 100%;
+    min-height: 80vh;
+    height: 90vh;
+    background: #333;
+    position: relative;
+    display: flex;
+    /* Keep flex to center the wrapper */
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    /* This will be overridden for text-content */
+    overflow: hidden;
+    padding: 2rem;
+    /* Add some padding to prevent content touching edges */
+}
+
+/* Optional: Overlay styles remain the same */
+
+/* New wrapper for image and text content */
+.featured-content-wrapper {
+    position: relative;
+    display: flex;
+    /* Makes its children (image and text) align horizontally */
+    align-items: center;
+    /* Vertically align items in the middle */
+    width: 100%;
+    /* Ensure it takes full width within its parent */
+    height: 100%;
+    gap: 3rem;
+    /* Space between the image and the text content */
+    text-align: left;
+    /* Reset text alignment for the content inside */
+}
+
+.featured-image-container {
+    flex: 1;
+    /* Allows the image container to take up available space */
+    min-width: 300px;
+    /* Minimum width for the image container */
+    max-width: 50%;
+    /* Image container takes max 50% of the wrapper */
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    /* Center image within its container */
+    align-items: center;
+}
+
+.featured-side-image {
+    object-fit: cover;
+    max-width: 100%;
+    /* Ensures image is responsive and fits its container */
+    height: 100%;
+    /* Maintain aspect ratio */
+    border-radius: 8px;
+    /* Optional: rounded corners for the image */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    /* Optional: subtle shadow */
+}
+
+/* Featured Text Content (previously featured-item) */
+.featured-text-content {
+    flex: 1;
+    /* Allows the text content to take up available space */
+    max-width: 50%;
+    /* Text content takes max 50% of the wrapper */
+    padding: 1rem;
+}
+
+.featured-title {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.featured-description {
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+.featured-btn {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.8rem 1.5rem;
+    background-color: #ffd700;
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.featured-btn:hover {
+    background-color: #e6c200;
+}
+
+.blog-section {
+    width: 100vw;
+    transform: translate(0, -10%);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1em;
+}
+
+.grid {
+    display: grid;
+    align-items: start;
+    grid-auto-flow: dense;
+    grid-template-columns: repeat(3, minmax(min(100%, 200px), 1fr));
+    grid-auto-rows: 40vh;
+    color: white;
+    gap: 2em;
+}
+
+.blog {
+    border: none;
+    z-index: 2;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-blend-mode: overlay;
+    overflow: hidden;
+    width: 100%;
+    border-radius: 1em;
+    font-size: 2vw;
+    height: 100%;
+    padding: 2em;
+    cursor: pointer;
+    transition: transform 0.5s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+}
+
+.blog:hover {
+    transform: translateY(-5px);
+}
+
+.blog:nth-child(4n+2) {
+    grid-column: span 2;
+}
+
+.blog:nth-child(5) {
+    grid-row: span 2;
+}
+
+/* .blog:nth-child(3n+4) {
+    grid-column: span 2;
+} */
+
+.load-more {
+    width: 100%;
+    padding: 1em;
+}
+
+.load-btn {
+    padding: 1em;
+    display: block;
+    border-radius: 1em;
+    background-color: #333;
+    color: #e6c200;
+    border: 1px solid #e6c200;
+    margin: 0 auto;
+}
+
+.load-btn:hover {
+    padding: 1em;
+    display: block;
+    border-radius: 1em;
+    background-color: #e6c200;
+    color: white;
+    border: 1px solid #e6c200;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+/* Basic Footer Styles */
+.site-footer {
+    background-color: #404243;
+     border-top-left-radius: 100em;
+    border-top-right-radius: 100em;
+    color: #ecf0f1;
+    padding: 3rem 1rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 2rem;
+}
+
+.footer-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 0.5rem;
+    display: inline-block;
+}
+
+/* Footer Info Section */
+.footer-info,
+.contact-form-container {
+    flex: 1;
+    min-width: 300px;
+    /* Ensures columns don't get too small */
+}
+
+.social-links {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.social-links a {
+    color: #ecf0f1;
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: #3498db;
+}
+
+/* Contact Form Section */
+.contact-form .form-group {
+    margin-bottom: 1rem;
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #7f8c8d;
+    border-radius: 4px;
+    background-color: #34495e;
+    color: #ecf0f1;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+.submit-btn {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #2980b9;
+}
+
+/* Footer Bottom Section */
+.footer-bottom {
+    text-align: center;
+    padding-top: 1.5rem;
+    margin-top: 2rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+     .footer-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .hamburger {
+        z-index: 1001;
+    }
+    .featured-image-container,
+    .featured-text-content {
+        flex: 1;
+        min-width: 100%;
+        border-radius: none;
+    }
+
+    .featured-title {
+        font-size: 2.5rem;
+    }
+
+    .featured-description {
+        font-size: 1rem;
+    }
+    .nav-links {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #333;
+        color: white;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+    }
+
+    .nav-links li {
+        margin: 0;
+        padding: 2rem 0;
+        font-size: 1.2em;
+    }
+    .nav-links a{
+        margin-top: 1em;
+        font-size: 1.2em;
+    }
+    .menu-toggle {
+        display: block;
+        /* Show the toggle button */
+    }
+
+    /* JavaScript will add this class to show the menu */
+    .nav-links.open {
+        display: flex;
+    }
+
+    .auth-buttons {
+        display: none;
+        /* Hide buttons on mobile for a cleaner look, or you can style them inside the menu */
+    }
+
+    .featured-section {
+        padding: 0;
+        min-height: 70vh;
+        height: 100%;
+        position: relative;
+        display: flex;
+        flex-flow: column;
+    }
+
+    .featured-content-wrapper {
+        padding: 0;
+        height: 100%;
+        flex: 1;
+    }
+
+    .featured-image-container {
+        padding: 0;
+        width: 100%;
+        border-radius: 0;
+    }
+
+    .blog-section {
+        transform: none;
+    }
+
+    .grid {
+        display: grid;
+        align-items: start;
+        grid-auto-flow: dense;
+        grid-template-columns: repeat(1, minmax(min(100%, 200px), 1fr));
+        color: white;
+        gap: 2em;
+    }
+
+    .blog {
+        padding: 5em 1px;
+        font-size: 1em;
+        text-align: center;
+    }
+
+    .blog:nth-child(4n+2) {
+        grid-column: span 1;
+    }
+
+    .blog:nth-child(5) {
+        grid-row: span 1;
+    }
+
+    .featured-content-wrapper {
+        gap: 0;
+        position: relative;
+        display: flex;
+        flex-flow: column;
+    }
+
+    .featured-content-wrapper .featured-image-container {
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+    }
+
+    .featured-content-wrapper .featured-image-container img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .featured-content-wrapper .featured-text-content {
+        background-color: rgba(0, 0, 0, 0.3);
+        z-index: 3;
+        min-height:70vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+
+}
