@@ -4,6 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="<%=product.short_desc%>">
+    <meta name="keywords" content="<%product.tags.forEach(tag=>{%><%=tag%>,<%})%>">
+    <meta name="author" content="Aryan Tiwari">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <title>
         <%= product.name %> | Product Detail
     </title>
@@ -139,24 +144,24 @@
 </head>
 
 <body>
-    <a href="/store" class="back-button">
-        &larr; Back
+    <a href="/store" aria-label="Back to Store Home Page" class="back-button">
+        <ion-icon name="arrow-back-outline"></ion-icon>
     </a>
 
     <h1 class="title">
         <%= product.title %>
     </h1>
-    <ul style="color: #666; font-size: 0.9em; display: flex;width: 100%;flex-wrap: wrap;list-style: none;gap: 1em;padding: 0;">
+    <ul
+        style="color: #666; font-size: 0.9em; display: flex;width: 100%;flex-wrap: wrap;list-style: none;gap: 1em;padding: 0;">
         <% product.tags.forEach(function(tag) { %>
             <li>
-                <a href="#" style="border-radius: 10px;text-decoration: none;color: hsl(0, 0%, 80%);background-color: hsl(0, 0%, 30%);padding: 10px 20px;">
+                <a href="#" aria-label="<%=tag%> Tag"
+                    style="display:block;border-radius:10px;text-decoration: none;color: hsl(0, 0%, 80%);background-color: hsl(0, 0%, 30%);padding: 10px 20px;">
                     <%= tag %>
                 </a>
             </li>
             <% }); %>
     </ul>
-    <hr>
-
     <div class="product-container">
         <div class="image-section">
             <img src="<%= product.image %>" alt="<%= product.name %>" class="product-image">
@@ -174,19 +179,11 @@
                         <%= stockStatus %>
                     </p>
 
-                    <a href="<%=product.target_link%>" style="display: inline-block;text-decoration: none;" class="buy-button" <%=product.stock <=0 ? 'disabled' : '' %>>
+                    <a aria-label="Target Link" href="<%=product.target_link%>"
+                        style="display: inline-block;text-decoration: none;" class="buy-button" <%=product.stock <=0
+                        ? 'disabled' : '' %>>
                         Get
                     </a>
-
-                    <!-- <h3 style="margin-top: 30px;">Key Features</h3>
-                    <ul class="features-list">
-
-                        <% product.features && product.features.forEach(function(feature) { %>
-                            <li>
-                                <%= feature %>
-                            </li>
-                            <% }); %>
-                    </ul> -->
         </div>
     </div>
 
@@ -195,7 +192,8 @@
         <p>
             <%- product.description %>
         </p>
-        <p style="font-size: 0.9em; color: #999;">Customer Rating: <%= product.rating %></p>
+        <p style="font-size: 0.9em; color: #999;">Customer Rating: <%= product.rating %>
+        </p>
     </section>
 </body>
 

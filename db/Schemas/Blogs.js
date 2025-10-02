@@ -5,8 +5,8 @@ const blogSchema = db.Schema({
     image:String,
     description:String,
     short_desc:String,
-    views:String,
-    uploaded_on:String,
+    views:{type:String,default:0},
+    uploaded_on:{type:Date,default:Date.now},
     tags:[String]
 })
 

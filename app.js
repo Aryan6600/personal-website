@@ -5,7 +5,41 @@ const Blog = require("./db/Schemas/Blogs")
 const Product = require("./db/Schemas/Products")
 const fs = require('fs')
 require("dotenv").config()
+const multer = require('multer')
+
+const uploadDir = path.join('static/uploads/images');
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, `static/uploads/images/`); // Specifies the directory to save files
+    },
+    filename: (req, file, cb) => {
+        // Creates a unique filename by adding a timestamp
+        cb(null, `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`);
+    }
+});
+const upload = multer({ 
+    storage: storage ,
+    imits: { fileSize: 10 * 1024 * 1024 }, // Sets a 10MB limit
+});
+const checkPass = async(req, res, next) => {
+    if (!req.body.pass) {
+        req.valid=true
+        return next()
+    }
+    if(req.body.pass==process.env.SECREAT){
+        console.log("valid user");
+        req.valid=true
+        next()}
+    else{
+        console.log("Not valid user");
+        req.valid=false
+        return next()
+    }
+};
+
+
 app.use(express.json());
+app.use(express.urlencoded({extended:true}));
 app.use("/static",express.static(path.join(__dirname,"static")))
 app.set("view engine","ejs")
 app.set('views', path.join(__dirname, 'templates'));
@@ -67,58 +101,31 @@ app.get('/api/blogs',async(req,res)=>{
         res.json([])
     }
 })
-function saveImageFromDataUri(dataUri, fileName, outputDir = "static/uploads/images/") {
-    // 1. Check for a valid Data URI format
-    if (!dataUri || !dataUri.startsWith('data:')) {
-        throw new Error("Invalid Data URI provided. It must start with 'data:'.");
+
+app.post('/api/blogs',upload.single('image'),checkPass,async(req,res)=>{
+    try{
+        console.log(req.body)
+        const {pass,title,description,short_desc,tags}=req.body
+        const file = req.file
+        if (!pass || !title || !description||!short_desc||!tags||!file) {
+        // Clean up the file if it exists, as the request is incomplete
+            if (file) fs.unlinkSync(file.path); 
+            return res.status(400).json({ message: 'Missing required fields (image, title, or pass).' });
+        }
+        if (!req.valid) {
+        // Password failed: Delete the saved file immediately
+            fs.unlinkSync(file.path); 
+            console.log(`Access attempt failed. Deleted file: ${file.path}`);
+
+            return res.status(403).json({ message: 'Invalid credentials. File upload forbidden.' });
+        }
+        const image = `/static/uploads/images/${req.file.filename}`
+        const newblog = new Blog({title,short_desc,description,tags,image})
+        await newblog.save()
+        res.json(newblog)
+    }catch(e){
+        res.json({"msg":e})
     }
-
-    // --- Extraction Logic ---
-    
-    // a. Split the string by the comma. The Base64 data is the second part.
-    const parts = dataUri.split(',');
-    if (parts.length !== 2) {
-        throw new Error("Data URI is malformed; missing a comma separator.");
-    }
-    const base64Data = parts[1]; 
-
-    // b. Extract the MIME type from the first part (e.g., 'image/png')
-    const mimeSection = parts[0];
-    const mimeMatch = mimeSection.match(/^data:([^;]+);base64$/);
-    
-    if (!mimeMatch) {
-        throw new Error("Could not extract MIME type from the Data URI prefix.");
-    }
-    
-    const mimeType = mimeMatch[1];
-    
-    // c. Get the file extension (e.g., 'png' from 'image/png')
-    const fileExtension = mimeType.split('/')[1]; 
-
-    // 2. Ensure the output directory exists
-    if (!fs.existsSync(outputDir)) {
-        fs.mkdirSync(outputDir, { recursive: true });
-    }
-
-    // 3. Decode the Base64 string into a binary Buffer
-    const buffer = Buffer.from(base64Data, 'base64');
-
-    // 4. Construct the full file path
-    const filePath = path.join(outputDir, `${fileName}.${fileExtension}`);
-
-    // 5. Write the Buffer to the file system
-    fs.writeFileSync(filePath, buffer);
-
-    console.log(`✅ File saved as: ${filePath} (Type: ${mimeType})`);
-    return filePath;
-}
-
-app.post('/api/upload/base64',async(req,res)=>{
-    const pass = req.body.pass
-    if(pass!=process.env.SECREAT) return res.json({})
-    const img=req.body.image
-    const fileName = saveImageFromDataUri(img,Date.now())
-    res.json({"file":`${fileName}`})
 })
 
 app.listen(3000,()=>{

@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="<%=post.short_desc%>">
+    <meta name="keywords" content="<%post.tags.forEach(tag=>{%><%=tag%>,<%})%>">
+    <meta name="author" content="Aryan Tiwari">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <title><%= post.title %></title>
     <style>
         body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 20px;background-color: #333; }
@@ -29,8 +34,8 @@
     </style>
 </head>
 <body>
-    <a href="/blog" class="back-button">
-        &larr; Back
+    <a href="/blog" class="back-button" aria-label="Back to Blogs Page">
+        <ion-icon name="arrow-back-outline"></ion-icon>
     </a>
     <header>
         <h1><%= post.title %></h1>
