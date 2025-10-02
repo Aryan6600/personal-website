@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= post.title %></title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 20px;background-color: #333; }
+        header h1 { color: white; margin-bottom: 5px; }
+        .meta-info { font-size: 0.9em; color: hsl(0,0%,70%); margin-bottom: 20px; padding-bottom: 10px; }
+        .meta-info span { margin-right: 15px; }
+        .main-image { width: 100%; height: auto; max-height: 450px; object-fit: cover; border-radius: 8px; margin-bottom: 20px; }
+        .short-desc { font-style: italic; color: hsl(0,0%,70%); margin-bottom: 20px; padding: 10px; border-left: 3px solid #007bff; background-color: hsl(0,0%,30%); }
+        .tags-list { list-style: none; padding: 0; margin: 30px 0 0;display: flex;align-items: center;flex-wrap: wrap;gap: 1em; }
+        .tags-list li a { display: block;text-decoration: none;width: max-content; white-space: nowrap; background: hsl(0,0%,30%); color: white; padding: 5px 10px; margin-right: 8px; border-radius: 4px; font-size: 0.8em; }
+        .back-button {
+            margin-right: auto;
+            width: max-content;
+            text-decoration: none;
+            color: #Fff;
+            font-size: 1em;
+            padding: 8px 15px;
+            border-radius: 4px;
+            background-color: #007bff;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.2s;
+        }
+    </style>
+</head>
+<body>
+    <a href="/blog" class="back-button">
+        &larr; Back
+    </a>
+    <header>
+        <h1><%= post.title %></h1>
+    </header>
+
+    <div class="meta-info">
+        <span>Published: <%= post.uploaded_on %></span>
+        <span>Views: <%= post.views %></span>
+    </div>
+
+    <img src="<%= post.image %>" alt="<%= post.title %>" class="main-image">
+
+    <p class="short-desc">
+        **Summary:** <%= post.short_desc %>
+    </p>
+
+    <section style="color: white;">
+        <h2>Article Details</h2>
+        <p><%- post.description %></p>
+    </section>
+
+    <footer style="border-top: 1px solid lightgrey;">
+        <h3 style="color: white;">Tags</h3>
+        <ul class="tags-list">
+            <% post.tags.forEach(function(tag) { %>
+                <li>
+                    <a href="">
+                        <%= tag %>
+                    </a></li>
+            <% }); %>
+        </ul>
+    </footer>
+</body>
+</html>

@@ -2,6 +2,7 @@
     --navbar-height: 60px;
     --sidebar-width: 250px;
     --primary-color: #3880ff; /* Ionic Blue */
+    --tert-color: #f3b83a; /* Ionic Blue */
     --secondary-color: #2dd36f; /* Ionic Success/Green for highlighting */
     --text-color: hsl(0,0%,90%);
     --header-text-color:white;
@@ -281,6 +282,10 @@ body {
 .bg-sec{
     --primary-color:var(--secondary-color);
     background-color: var(--secondary-color);
+}
+.bg-tert{
+    --primary-color:var(--tert-color);
+    background-color: var(--tert-color);
 }
 .content-wrapper{
     padding: 1em 1em 0 1em;

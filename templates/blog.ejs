@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/blog/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <title>Welcome To My Blog</title>
+</head>
+
+<body>
+    <nav class="navbar">
+        <a href="/" class="logo">Aryan6600 | Blog</a>
+        <button class="menu-toggle" aria-label="Toggle navigation menu">
+            <span class="hamburger"></span>
+        </button>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/store">Store</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <!-- <a href="#login" class="btn">Login</a>
+            <a href="#signup" class="btn btn-2">Sign Up</a> -->
+        </ul>
+    </nav>
+    <section class="featured-section">
+        <a href="/blog/<%=featured._id%>" class="featured-content-wrapper">
+            <div class="featured-image-container">
+                <img src="<%=featured.image%>" alt="Description of featured item" class="featured-side-image">
+            </div>
+            <div class="featured-text-content">
+                <h2 class="featured-title"><%=featured.title%></h2>
+                <p class="featured-description"><%=featured.description%></p>
+            </div>
+        </a>
+    </section>
+    <section class="blog-section">
+        <div class="container">
+            <div class="grid" id="blogs-grid">
+                <%for(i=0;i<blogs.length;i++){%>
+                    <a href="/blog/<%=blogs[i]._id%>" class="blog" style="background-image: url('<%=blogs[i].image%>')">
+                        <div class="text-wrapper">
+                            <h2 class="section-title"><%=blogs[i].title%></h2>
+                        </div>
+                    </a>
+                <%}%>
+            </div>
+        </div>
+        <div class="load-more">
+            <button class="load-btn" id="loadMoreBtn">Load More</button>
+        </div>
+    </section>
+    <footer class="site-footer">
+        <div class="footer-bottom">
+            <p>&copy; 2025 Aryan6600. All Rights Reserved.</p>
+        </div>
+    </footer>
+    <script src="/static/blog/script.js"></script>
+</body>
+
+</html>
